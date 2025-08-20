@@ -36,23 +36,26 @@ public class Task {
         return false;
     }
 
-    public static Task makeTask(String command) {
+    public static Task makeTask(String command) throws Exception {
         String[] parts = command.split("\\s+");
         String firstWord = parts[0];
         String[] splitBySlash = command.split("/");
         if (firstWord.equals("todo")) {
             String description = Task.secondWordOnwards("todo", splitBySlash[0]);
+            checkStrings(description);
             return new Todo(description);
         }
         else if (firstWord.equals("deadline")) {
             String description = Task.secondWordOnwards("deadline", splitBySlash[0]);
             String byTime = Task.secondWordOnwards("by", splitBySlash[1]);
+            checkStrings(description, byTime);
             return new Deadline(description, byTime);
         }
         else if (firstWord.equals("event")) {
             String description = Task.secondWordOnwards("event", splitBySlash[0]);
             String startTime = Task.secondWordOnwards("from", splitBySlash[1]);
             String endTime = Task.secondWordOnwards("to", splitBySlash[2]);
+            checkStrings(description, startTime, endTime);
             return new Event(description, startTime, endTime);
         }
         return new Task("");
@@ -60,6 +63,14 @@ public class Task {
 
     public static boolean startsWithMark(String s) {
         return s.matches("^mark\\s+\\d+$") || s.matches("^unmark\\s+\\d+$");
+    }
+
+    public static void checkStrings(String ...strings) {
+        for (String s : strings) {
+            if (s != null && s.isEmpty()) {
+                throw new Error("String cannot be empty");
+            }
+        }
     }
 
     public static boolean isMark(String s) {
@@ -75,11 +86,10 @@ public class Task {
         }
     }
 
-    public static String secondWordOnwards(String valid, String s) {
-        String[] parts = s.split("\\s+");
+    public static String secondWordOnwards(String valid, String s) throws TensionException {
+        String[] parts = s.strip().split("\\s+");
         if (!parts[0].equals(valid)) {
-            System.out.println(parts[0]);
-            throw new IllegalArgumentException("Invalid task description");
+            throw new TensionException("Invalid task description, keyword missing is: " + valid);
         }
         StringBuilder result = new StringBuilder();
         for (int i = 1; i < parts.length; i++) {

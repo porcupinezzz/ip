@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Tension {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TensionException {
         Scanner scanner = new Scanner(System.in);
         Task[] inputs = new Task[100];
         int counter = 0;
@@ -20,7 +20,14 @@ public class Tension {
                     command = "special-case";
                 }
                 else {
-                    t = Task.makeTask(command);
+                    try {
+                        t = Task.makeTask(command);
+                    }
+                    catch (Exception e) {
+                        e.toString();
+                        e.printStackTrace();
+                        return;
+                    }
                     command = "task-made";
                 }
             }
@@ -28,7 +35,7 @@ public class Tension {
                 case "task-made":
                     inputs[counter++] = t;
                     System.out.println("Got it. I've added this task:\n" +
-                            t.getDescription() + "\n" +
+                            t.toString() + "\n" +
                             "     Now you have " + counter + " tasks in the list.");
                     break;
                 case "special-case":
@@ -51,9 +58,7 @@ public class Tension {
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
                 default:
-                    System.out.println(command);
-                    inputs[counter++] = new Task(command);
-                    break;
+                    throw new TensionException("Invalid command, please start with todo, deadline, or event");
             }
         }
     }
