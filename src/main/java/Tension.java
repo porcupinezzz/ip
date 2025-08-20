@@ -11,13 +11,26 @@ public class Tension {
             String command = scanner.nextLine();
             Integer index=-1;
             Boolean isMark=false;
+            Task t = null;
             if (Task.matches(command)) {
-                isMark = Task.isMark(command);
-                String[] parts = command.split("\\s+");
-                index = Integer.parseInt(parts[1]) - 1;
-                command = "special-case";
+                if (Task.startsWithMark(command)) {
+                    isMark = Task.isMark(command);
+                    String[] parts = command.split("\\s+");
+                    index = Integer.parseInt(parts[1]) - 1;
+                    command = "special-case";
+                }
+                else {
+                    t = Task.makeTask(command);
+                    command = "task-made";
+                }
             }
             switch (command) {
+                case "task-made":
+                    inputs[counter++] = t;
+                    System.out.println("Got it. I've added this task:\n" +
+                            t.getDescription() + "\n" +
+                            "     Now you have " + counter + " tasks in the list.");
+                    break;
                 case "special-case":
                     if (index <0 || index >= counter) {
                         System.out.println("Invalid index");
@@ -28,8 +41,9 @@ public class Tension {
                     }
                     break;
                 case "list":
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < counter; i++) {
-                        System.out.println(i+1 + "." + inputs[i].getDescription());
+                        System.out.println(i+1 + "." + inputs[i].toString());
                     }
                     break;
                 case "bye":

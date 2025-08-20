@@ -26,10 +26,40 @@ public class Task {
     }
 
     public static boolean matches(String s) {
-        if (s.matches("^mark\\s+\\d+$") || s.matches("^unmark\\s+\\d+$")) {
-            return true;
+        String command = s.split("\\s+")[0];
+        String[] valid= new String[]{"mark", "unmark", "todo", "deadline", "event"};
+        for (String v : valid) {
+            if (command.equals(v)) {
+                return true;
+            }
         }
         return false;
+    }
+
+    public static Task makeTask(String command) {
+        String[] parts = command.split("\\s+");
+        String firstWord = parts[0];
+        String[] splitBySlash = command.split("/");
+        if (firstWord.equals("todo")) {
+            String description = Task.secondWordOnwards("todo", splitBySlash[0]);
+            return new Todo(description);
+        }
+        else if (firstWord.equals("deadline")) {
+            String description = Task.secondWordOnwards("deadline", splitBySlash[0]);
+            String byTime = Task.secondWordOnwards("by", splitBySlash[1]);
+            return new Deadline(description, byTime);
+        }
+        else if (firstWord.equals("event")) {
+            String description = Task.secondWordOnwards("event", splitBySlash[0]);
+            String startTime = Task.secondWordOnwards("from", splitBySlash[1]);
+            String endTime = Task.secondWordOnwards("to", splitBySlash[2]);
+            return new Event(description, startTime, endTime);
+        }
+        return new Task("");
+    }
+
+    public static boolean startsWithMark(String s) {
+        return s.matches("^mark\\s+\\d+$") || s.matches("^unmark\\s+\\d+$");
     }
 
     public static boolean isMark(String s) {
@@ -45,7 +75,25 @@ public class Task {
         }
     }
 
+    public static String secondWordOnwards(String valid, String s) {
+        String[] parts = s.split("\\s+");
+        if (!parts[0].equals(valid)) {
+            System.out.println(parts[0]);
+            throw new IllegalArgumentException("Invalid task description");
+        }
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i < parts.length; i++) {
+            result.append(parts[i]);
+            result.append(" ");
+        }
+        return result.toString().strip();
+    }
+
     public String getDescription() {
+        return description;
+    }
+
+    public String toString() {
         return "["+getStatusIcon()+"] " + description;
     }
 }
