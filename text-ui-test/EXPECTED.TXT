@@ -1,16 +1,19 @@
 Hello! I'm Tension
 What can I do for you?
 Got it. I've added this task:
-homework
+[T][ ] homework
      Now you have 1 tasks in the list.
 Got it. I've added this task:
-cs2103t ip task
+[D][ ] cs2103t ip task (by: 6pm today)
      Now you have 2 tasks in the list.
 Got it. I've added this task:
-group meeting
+[E][ ] group meeting (from: 5pm to: 7pm)
      Now you have 3 tasks in the list.
 Here are the tasks in your list:
 1.[T][ ] homework
 2.[D][ ] cs2103t ip task (by: 6pm today)
 3.[E][ ] group meeting (from: 5pm to: 7pm)
+Noted. I've removed this task:
+[D][ ] cs2103t ip task (by: 6pm today)
+     Now you have 2 tasks in the list.
 Bye. Hope to see you again soon!
