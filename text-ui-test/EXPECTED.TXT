@@ -1,7 +1,16 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Tension
+What can I do for you?
+Got it. I've added this task:
+homework
+     Now you have 1 tasks in the list.
+Got it. I've added this task:
+cs2103t ip task
+     Now you have 2 tasks in the list.
+Got it. I've added this task:
+group meeting
+     Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1.[T][ ] homework
+2.[D][ ] cs2103t ip task (by: 6pm today)
+3.[E][ ] group meeting (from: 5pm to: 7pm)
+Bye. Hope to see you again soon!
