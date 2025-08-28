@@ -1,4 +1,4 @@
-package task;
+package tension.task;
 
 public class Task {
     protected String description;
@@ -10,19 +10,19 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done tension.task with X
     }
 
     public String markDone() {
         isDone = true;
-        String s = ("Nice! I've marked this task as done:\n[" +
+        String s = ("Nice! I've marked this tension.task as done:\n[" +
                 getStatusIcon() + "] "+description);
         return s;
     }
 
     public String unmarkDone() {
         isDone = false;
-        String s = ("OK, I've marked this task as not done yet:\n[" +
+        String s = ("OK, I've marked this tension.task as not done yet:\n[" +
                 getStatusIcon() +"] "+ description);
         return s;
     }
@@ -97,7 +97,7 @@ public class Task {
     public static String secondWordOnwards(String valid, String s) throws TensionException {
         String[] parts = s.strip().split("\\s+");
         if (!parts[0].equals(valid)) {
-            throw new TensionException("Invalid task description, keyword missing is: " + valid);
+            throw new TensionException("Invalid tension.task description, keyword missing is: " + valid);
         }
         StringBuilder result = new StringBuilder();
         for (int i = 1; i < parts.length; i++) {

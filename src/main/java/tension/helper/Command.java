@@ -1,4 +1,4 @@
-package helper;
+package tension.helper;
 
 public class Command {
 

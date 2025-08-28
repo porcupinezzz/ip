@@ -1,4 +1,4 @@
-package task;
+package tension.task;
 
 public class Event extends Task {
 

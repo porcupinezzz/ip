@@ -1,9 +1,11 @@
-import helper.Command;
-import helper.Storage;
-import helper.Ui;
-import helper.TaskList;
-import helper.Parser;
-import task.Task;
+package tension;
+
+import tension.helper.Command;
+import tension.helper.Storage;
+import tension.helper.Ui;
+import tension.helper.TaskList;
+import tension.helper.Parser;
+import tension.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 

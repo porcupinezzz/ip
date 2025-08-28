@@ -1,6 +1,6 @@
-package helper;
+package tension.helper;
 
-import task.Task;
+import tension.task.Task;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class Storage {
     }
 
     /**
-     * writes a task to the storage file
+     * writes a tension.task to the storage file
      * @param t
      */
     public void writeFile(Task t) {

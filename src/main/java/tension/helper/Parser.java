@@ -1,6 +1,6 @@
-package helper;
+package tension.helper;
 
-import task.Task;
+import tension.task.Task;
 
 /**
  * Provides methods to parse information given by
@@ -16,7 +16,7 @@ public class Parser {
      *
      * @param input a string that starts with list, mark, unmark,
      *                delete, todo, deadline, event
-     * @return helper.Command
+     * @return tension.helper.Command
      */
     public Command parse(String input) {
         int index = -1;

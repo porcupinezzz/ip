@@ -1,6 +1,6 @@
-package helper;
+package tension.helper;
 
-import task.Task;
+import tension.task.Task;
 
 import java.util.ArrayList;
 
@@ -9,18 +9,18 @@ public class Ui {
     public Ui(){}
 
     public void displayGreeting() {
-        System.out.println("Hello! I'm Tension\n" +
+        System.out.println("Hello! I'm tension.Tension\n" +
                 "What can I do for you?");
     }
 
     public void displayDeletedTask(Task removed, int counter) {
-        System.out.println("Noted. I've removed this task:\n" +
+        System.out.println("Noted. I've removed this tension.task:\n" +
                 removed.toString() + "\n" +
                 "     Now you have " + counter +" tasks in the list.");
     }
 
     public void displayAddedTask(Task added, int counter) {
-        System.out.println("Got it. I've added this task:\n" +
+        System.out.println("Got it. I've added this tension.task:\n" +
                 added + "\n" +
                 "     Now you have " + counter + " tasks in the list.");
     }

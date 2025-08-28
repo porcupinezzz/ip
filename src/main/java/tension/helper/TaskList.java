@@ -1,6 +1,6 @@
-package helper;
+package tension.helper;
 
-import task.Task;
+import tension.task.Task;
 
 import java.util.ArrayList;
 
