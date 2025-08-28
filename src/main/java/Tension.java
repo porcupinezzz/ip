@@ -1,65 +1,68 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tension {
     public static void main(String[] args) throws TensionException {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> inputs = new ArrayList<>();
-        int counter = 0;
+        ArrayList<Task> inputs = DataWriter.retrieveTasks();
+        int counter = inputs.size();
         System.out.println("Hello! I'm Tension\n" +
                 "What can I do for you?");
         while (true) {
             String command = scanner.nextLine();
             int index=-1;
-            Boolean isMark=false;
-            Task t = null;
+            boolean isMark=false;
+            Task currTask = null;
             if (Task.matches(command)) {
-                // mark tasks
+                String[] parts = command.split("\\s+");
                 if (Task.startsWithMark(command)) {
                     isMark = Task.isMark(command);
-                    String[] parts = command.split("\\s+");
                     index = Integer.parseInt(parts[1]) - 1;
-                    command = "special-case";
                 }
-                // delete tasks
                 else if (Task.startsWithDelete(command)) {
-                    String[] parts = command.split("\\s+");
                     index = Integer.parseInt(parts[1]) - 1;
-                    command = "delete";
                 }
                 else {
                     try {
-                        t = Task.makeTask(command);
+                        currTask = Task.makeTask(command);
                     }
                     catch (Exception e) {
                         e.toString();
                         e.printStackTrace();
                         return;
                     }
-                    command = "task-made";
                 }
+                command = parts[0];
             }
             switch (command) {
                 case "delete":
                     Task removed = inputs.remove(index);
+                    DataWriter.deleteLine(index);
                     counter--;
                     System.out.println("Noted. I've removed this task:\n" +
                             removed.toString() + "\n" +
                             "     Now you have " + counter +" tasks in the list.");
                     break;
-                case "task-made":
-                    inputs.add(t);
+                case "event":
+                case "deadline":
+                case "todo":
+                    inputs.add(currTask);
+                    DataWriter.writeFile(currTask);
                     counter++;
                     System.out.println("Got it. I've added this task:\n" +
-                            t.toString() + "\n" +
+                            currTask.toString() + "\n" +
                             "     Now you have " + counter + " tasks in the list.");
                     break;
-                case "special-case":
+                case "mark":
+                case "unmark":
                     if (index <0 || index >= counter) {
                         System.out.println("Invalid index");
                     }
                     else {
-                        String s = inputs.get(index).getStatus(isMark);
+                        Task task = inputs.get(index);
+                        String s = task.getStatus(isMark);
+                        DataWriter.rewriteLine(index, task.makeStoreString());
                         System.out.println(s);
                     }
                     break;
