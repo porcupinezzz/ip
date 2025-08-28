@@ -1,2 +1,5 @@
 T|false|1
 E|false|meeting|1pm|2pm
+D|false|meeting|2019-10-15
+D|false|help her|2019-10-15
+D|false|yap with friend|2025-01-01

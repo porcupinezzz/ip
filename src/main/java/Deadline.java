@@ -1,10 +1,22 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
+    }
+
+    public static void checkFormat(String time){
+        try {
+            LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format: needs to be yyyy-mm-dd");
+        }
     }
 
     @Override
@@ -14,6 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String date = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return "[D]" + super.toString() + " (by: " + date + ")";
     }
 }
