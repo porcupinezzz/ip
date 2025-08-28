@@ -5,11 +5,24 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataWriter {
+/**
+ * manages storage files
+ */
+public class Storage {
 
-    public static void writeFile(Task t) {
+    String path;
+
+    public Storage(String path) {
+        this.path = path;
+    }
+
+    /**
+     * writes a task to the storage file
+     * @param t
+     */
+    public void writeFile(Task t) {
         try {
-            FileWriter fileWriter = new FileWriter("data.txt", true);
+            FileWriter fileWriter = new FileWriter(this.path, true);
             fileWriter.write(t.makeStoreString() + "\n");
             fileWriter.close();
         }
@@ -18,17 +31,21 @@ public class DataWriter {
         }
     }
 
-    public static void deleteLine(int line) {
+    /**
+     * deletes line number = n in storage
+     * @param n
+     */
+    public void deleteLine(int n) {
         try {
-            Path filePath = Path.of("./data.txt");
+            Path filePath = Path.of(this.path);
             List<String> lines = Files.readAllLines(filePath);
 
-            if (line < 0 || line > lines.size()) {
-                System.out.println("Invalid line number: " + line);
+            if (n < 0 || n > lines.size()) {
+                System.out.println("Invalid line number: " + n);
                 return;
             }
 
-            lines.remove(line);
+            lines.remove(n);
 
             Files.write(filePath, lines);
         } catch (Exception e) {
@@ -36,17 +53,22 @@ public class DataWriter {
         }
     }
 
-    public static void rewriteLine(int line, String newLine) {
+    /**
+     * replaces line number n with string newLine
+     * @param n
+     * @param newLine
+     */
+    public void rewriteLine(int n, String newLine) {
         try {
-            Path filePath = Path.of("./data.txt");
+            Path filePath = Path.of(this.path);
             List<String> lines = Files.readAllLines(filePath);
 
-            if (line < 0 || line > lines.size()) {
-                System.out.println("Invalid line number: " + line);
+            if (n < 0 || n > lines.size()) {
+                System.out.println("Invalid line number: " + n);
                 return;
             }
 
-            lines.set(line, newLine);
+            lines.set(n, newLine);
 
             Files.write(filePath, lines);
         } catch (Exception e) {
@@ -54,10 +76,14 @@ public class DataWriter {
         }
     }
 
-    public static ArrayList<Task> retrieveTasks(){
+    /**
+     * retrieves tasks from storage
+     * @return ArrayList of tasks
+     */
+    public ArrayList<Task> retrieveTasks(){
         try {
             ArrayList<Task> tasks = new ArrayList<>();
-            Path filePath = Path.of("./data.txt");
+            Path filePath = Path.of(this.path);
             List<String> lines = Files.readAllLines(filePath);
             for (String line : lines) {
                 tasks.add(Task.makeTaskFromMemory(line));
@@ -71,5 +97,4 @@ public class DataWriter {
         }
         return null;
     }
-
 }

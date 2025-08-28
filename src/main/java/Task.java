@@ -25,17 +25,6 @@ public class Task {
         return s;
     }
 
-    public static boolean matches(String s) {
-        String command = s.split("\\s+")[0];
-        String[] valid= new String[]{"mark", "unmark","delete", "todo", "deadline", "event"};
-        for (String v : valid) {
-            if (command.equals(v)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static Task makeTask(String command) throws Exception {
         String[] parts = command.split("\\s+");
         String firstWord = parts[0];
@@ -80,16 +69,6 @@ public class Task {
         }
         task.getStatus(Boolean.parseBoolean(parts[1]));
         return task;
-    }
-
-
-    public static boolean startsWithMark(String s) {
-        return s.matches("^mark\\s+\\d+$") || s.matches("^unmark\\s+\\d+$");
-    }
-
-    public static boolean startsWithDelete(String s) {
-        String firstWord = s.split("\\s+")[0];
-        return firstWord.equals("delete");
     }
 
     public static void checkStrings(String ...strings) {
