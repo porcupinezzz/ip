@@ -1,0 +1,2 @@
+T|false|1
+E|false|meeting|1pm|2pm

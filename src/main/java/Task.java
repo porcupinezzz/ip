@@ -61,6 +61,27 @@ public class Task {
         return new Task("");
     }
 
+    public static Task makeTaskFromMemory(String command) throws Exception {
+        String[] parts = command.split("[|]");
+        String firstWord = parts[0];
+        Task task = new Task("");
+        if (firstWord.equals("T")) {
+            checkStrings(parts[2]);
+            task = new Todo(parts[2]);
+        }
+        else if (firstWord.equals("D")) {
+            checkStrings(parts[2], parts[3]);
+            task = new Deadline(parts[2], parts[3]);
+        }
+        else if (firstWord.equals("E")) {
+            checkStrings(parts[2], parts[3], parts[4]);
+            task = new Event(parts[2], parts[3], parts[4]);
+        }
+        task.getStatus(Boolean.parseBoolean(parts[1]));
+        return task;
+    }
+
+
     public static boolean startsWithMark(String s) {
         return s.matches("^mark\\s+\\d+$") || s.matches("^unmark\\s+\\d+$");
     }
@@ -106,6 +127,10 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public String makeStoreString() {
+        return "";
     }
 
     public String toString() {
