@@ -49,6 +49,7 @@ public class Task {
             String description = Task.secondWordOnwards("deadline", splitBySlash[0]);
             String byTime = Task.secondWordOnwards("by", splitBySlash[1]);
             checkStrings(description, byTime);
+            Deadline.checkFormat(byTime);
             return new Deadline(description, byTime);
         }
         else if (firstWord.equals("event")) {
