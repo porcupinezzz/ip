@@ -5,14 +5,16 @@ import tension.task.Task;
 /**
  * Provides methods to parse information given by
  * the user
- *
  */
 public class Parser {
 
+    /**
+     * Returns parser object to parse commands
+     */
     public Parser() {}
 
     /**
-     * returns relevant information based on command given
+     * Returns relevant information based on command given
      *
      * @param input a string that starts with list, mark, unmark,
      *                delete, todo, deadline, event
@@ -25,7 +27,7 @@ public class Parser {
         String firstString = parts[0];
         if (matches(firstString)) {
             if (firstString.equals("mark") || parts[0].equals("unmark")) {
-                isMark = Task.isMark(input);
+                isMark = firstString.equals("mark");
                 index = Integer.parseInt(parts[1]) - 1;
             }
             else if (firstString.equals("delete")) {
@@ -36,7 +38,7 @@ public class Parser {
         return null;
     }
 
-    public static boolean matches(String s) {
+    private static boolean matches(String s) {
         String[] valid= new String[]{"bye","list", "mark", "unmark","delete", "todo", "deadline", "event"};
         for (String v : valid) {
             if (s.equals(v)) {
@@ -45,6 +47,5 @@ public class Parser {
         }
         return false;
     }
-
 
 }

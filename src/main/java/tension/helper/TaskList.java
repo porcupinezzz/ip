@@ -12,17 +12,31 @@ public class TaskList {
     private Storage storage;
     private Ui ui;
 
-    public TaskList(ArrayList<Task> tasks, ArrayList<Command> command, Storage storage, Ui ui) {
+    /**
+     * Initialises the task list with the necessary tools
+     * @param tasks list of all tasks
+     * @param commands list of commands to be done
+     * @param storage storage object that links taskList to storage
+     * @param ui outputs text to the UI
+     */
+    public TaskList(ArrayList<Task> tasks, ArrayList<Command> commands, Storage storage, Ui ui) {
         this.tasks = tasks;
-        this.commands = command;
+        this.commands = commands;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Inserts command into command list
+     */
     public void insertCommand(Command command) {
         this.commands.add(command);
     }
 
+    /**
+     * Executes all the commands in the command list
+     * and adds them to the task list
+     */
     public boolean execute() throws TensionException {
         int counter = tasks.size();
         Command command = commands.remove(0);
@@ -39,7 +53,7 @@ public class TaskList {
             case "todo":
                 Task currTask;
                 try {
-                    currTask = Task.makeTask(command.fullWord);
+                    currTask = Task.makeTask(command.fullCommand);
                 } catch (Exception e) {
                     e.toString();
                     e.printStackTrace();
