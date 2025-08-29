@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    public Ui(){}
+    public Ui() { }
 
     public void displayGreeting() {
         System.out.println("Hello! I'm tension.Tension\n" +
@@ -16,7 +16,7 @@ public class Ui {
     public void displayDeletedTask(Task removed, int counter) {
         System.out.println("Noted. I've removed this tension.task:\n" +
                 removed.toString() + "\n" +
-                "     Now you have " + counter +" tasks in the list.");
+                "     Now you have " + counter + " tasks in the list.");
     }
 
     public void displayAddedTask(Task added, int counter) {

@@ -31,7 +31,7 @@ public class Tension {
             Parser parser = new Parser();
             Command command = parser.parse(input);
             taskList.insertCommand(command);
-            if (taskList.execute()) {
+            if (taskList.executesAndExits()) {
                 scanner.close();
                 return;
             }

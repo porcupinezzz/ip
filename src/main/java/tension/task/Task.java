@@ -18,7 +18,7 @@ public class Task {
     public String markDone() {
         isDone = true;
         String s = ("Nice! I've marked this tension.task as done:\n[" +
-                getStatusIcon() + "] "+description);
+                getStatusIcon() + "] "+ description);
         return s;
     }
 
@@ -37,15 +37,13 @@ public class Task {
             String description = Task.secondWordOnwards("todo", splitBySlash[0]);
             checkStrings(description);
             return new Todo(description);
-        }
-        else if (firstWord.equals("deadline")) {
+        } else if (firstWord.equals("deadline")) {
             String description = Task.secondWordOnwards("deadline", splitBySlash[0]);
-            String byTime = Task.secondWordOnwards("by", splitBySlash[1]);
+            String byTime = Task.secondWordOnwards("dueDate", splitBySlash[1]);
             checkStrings(description, byTime);
             Deadline.checkFormat(byTime);
             return new Deadline(description, byTime);
-        }
-        else if (firstWord.equals("event")) {
+        } else if (firstWord.equals("event")) {
             String description = Task.secondWordOnwards("event", splitBySlash[0]);
             String startTime = Task.secondWordOnwards("from", splitBySlash[1]);
             String endTime = Task.secondWordOnwards("to", splitBySlash[2]);
@@ -62,12 +60,10 @@ public class Task {
         if (firstWord.equals("T")) {
             checkStrings(parts[2]);
             task = new Todo(parts[2]);
-        }
-        else if (firstWord.equals("D")) {
+        } else if (firstWord.equals("D")) {
             checkStrings(parts[2], parts[3]);
             task = new Deadline(parts[2], parts[3]);
-        }
-        else if (firstWord.equals("E")) {
+        } else if (firstWord.equals("E")) {
             checkStrings(parts[2], parts[3], parts[4]);
             task = new Event(parts[2], parts[3], parts[4]);
         }
@@ -75,7 +71,7 @@ public class Task {
         return task;
     }
 
-    public static void checkStrings(String ...strings) {
+    public static void checkStrings(String... strings) {
         for (String s : strings) {
             if (s != null && s.isEmpty()) {
                 throw new Error("String cannot be empty");
@@ -90,8 +86,7 @@ public class Task {
     public String getStatus(Boolean isMark) {
         if (isMark) {
             return markDone();
-        }
-        else {
+        } else {
             return unmarkDone();
         }
     }

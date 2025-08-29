@@ -23,7 +23,7 @@ public class TaskList {
         this.commands.add(command);
     }
 
-    public boolean execute() throws TensionException {
+    public boolean executesAndExits() throws TensionException {
         int counter = tasks.size();
         Command command = commands.remove(0);
         int index = command.index;
@@ -34,8 +34,8 @@ public class TaskList {
                 counter--;
                 ui.displayDeletedTask(removed, counter);
                 break;
-            case "event":
-            case "deadline":
+            case "event": // Fallthrough
+            case "deadline": // Fallthrough
             case "todo":
                 Task currTask;
                 try {
@@ -50,13 +50,13 @@ public class TaskList {
                 counter++;
                 ui.displayAddedTask(currTask, counter);
                 break;
-            case "mark":
+            case "mark": // Fallthrough
             case "unmark":
                 if (index < 0 || index >= counter) {
                     System.out.println("Invalid index");
                 } else {
                     Task task = tasks.get(index);
-                    String s = task.getStatus(command.isMark);
+                    String s = task.getStatus(command.isMarked);
                     storage.rewriteLine(index, task.makeStoreString());
                     System.out.println(s);
                 }
@@ -68,7 +68,7 @@ public class TaskList {
                 System.out.println("Bye. Hope to see you again soon!");
                 return true;
             default:
-                throw new TensionException("Invalid command, please start with todo, deadline, or event");
+                throw new TensionException("Invalid command, please startTime with todo, deadline, or event");
         }
         return false;
     }

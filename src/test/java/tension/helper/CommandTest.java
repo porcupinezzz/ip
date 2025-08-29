@@ -9,7 +9,7 @@ public class CommandTest {
         Command command = new Command(0, "help", true, "help me");
         assertEquals(0, command.index);
         assertEquals("help", command.commandName);
-        assertEquals(true, command.isMark);
+        assertEquals(true, command.isMarked);
         assertEquals("help me", command.fullWord);
     }
 }

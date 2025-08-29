@@ -2,22 +2,22 @@ package tension.task;
 
 public class Event extends Task {
 
-    protected String start;
-    protected String end;
+    protected String startTime;
+    protected String endTime;
 
-    public Event(String description, String start, String end) {
+    public Event(String description, String startTime, String endTime) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
     public String makeStoreString() {
-        return "E|" + super.isDone + "|" + description + "|" + start + "|" + end;
+        return "E|" + super.isDone + "|" + description + "|" + startTime + "|" + endTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start + " to: " + end +")";
+        return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime +")";
     }
 }

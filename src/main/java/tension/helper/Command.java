@@ -3,14 +3,14 @@ package tension.helper;
 public class Command {
 
     int index;
-    boolean isMark;
+    boolean isMarked;
     String commandName;
     String fullWord;
 
-    public Command(int index, String commandWord, boolean isMark, String fullWord) {
+    public Command(int index, String commandWord, boolean isMarked, String fullWord) {
         this.index = index;
         this.commandName = commandWord;
-        this.isMark = isMark;
+        this.isMarked = isMarked;
         this.fullWord = fullWord;
     }
 }
