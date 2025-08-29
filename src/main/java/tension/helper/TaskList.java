@@ -37,7 +37,7 @@ public class TaskList {
      * Executes all the commands in the command list
      * and adds them to the task list
      */
-    public boolean execute() throws TensionException {
+    public boolean executesAndExits() throws TensionException {
         int counter = tasks.size();
         Command command = commands.remove(0);
         int index = command.index;
@@ -48,12 +48,12 @@ public class TaskList {
                 counter--;
                 ui.displayDeletedTask(removed, counter);
                 break;
-            case "event":
-            case "deadline":
+            case "event": // Fallthrough
+            case "deadline": // Fallthrough
             case "todo":
                 Task currTask;
                 try {
-                    currTask = Task.makeTask(command.fullCommand);
+                    currTask = Task.makeTask(command.fullWord);
                 } catch (Exception e) {
                     e.toString();
                     e.printStackTrace();
@@ -64,13 +64,13 @@ public class TaskList {
                 counter++;
                 ui.displayAddedTask(currTask, counter);
                 break;
-            case "mark":
+            case "mark": // Fallthrough
             case "unmark":
                 if (index < 0 || index >= counter) {
                     System.out.println("Invalid index");
                 } else {
                     Task task = tasks.get(index);
-                    String s = task.getStatus(command.isMark);
+                    String s = task.getStatus(command.isMarked);
                     storage.rewriteLine(index, task.makeStoreString());
                     System.out.println(s);
                 }

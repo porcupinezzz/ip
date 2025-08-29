@@ -8,7 +8,7 @@ public class TaskTest {
     @Test
     public void makeTaskTest() throws Exception {
         Task todo = Task.makeTask("todo yes");
-        Task deadline = Task.makeTask("deadline yes/by 2019-01-01");
+        Task deadline = Task.makeTask("deadline yes/dueDate 2019-01-01");
         Task event = Task.makeTask("event yes/from 6pm/to 8pm");
         Task faulty = Task.makeTask("faulty");
         assertEquals((new Todo("yes")).toString(),todo.toString());

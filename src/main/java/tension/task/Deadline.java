@@ -6,20 +6,20 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    protected LocalDate dueDate;
 
     /**
      * returns new Deadline object
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDate) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.dueDate = LocalDate.parse(dueDate);
     }
 
     /**
      * checks that time given is in an acceptable format
      */
-    public static void checkFormat(String time){
+    public static void checkFormat(String time) {
         try {
             LocalDate.parse(time);
         } catch (DateTimeParseException e) {
@@ -29,12 +29,12 @@ public class Deadline extends Task {
 
     @Override
     public String makeStoreString() {
-        return "D|" + super.isDone + "|" + description + "|" + by;
+        return "D|" + super.isDone + "|" + description + "|" + dueDate;
     }
 
     @Override
     public String toString() {
-        String date = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String date = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return "[D]" + super.toString() + " (by: " + date + ")";
     }
 }

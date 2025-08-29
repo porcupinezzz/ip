@@ -3,9 +3,9 @@ package tension.helper;
 public class Command {
 
     int index;
-    boolean isMark;
+    boolean isMarked;
     String commandName;
-    String fullCommand;
+    String fullWord;
 
     /**
      * initializes the command given the following parameters
@@ -17,7 +17,7 @@ public class Command {
     public Command(int index, String commandWord, boolean isMark, String fullCommand) {
         this.index = index;
         this.commandName = commandWord;
-        this.isMark = isMark;
-        this.fullCommand = fullCommand;
+        this.isMarked = isMarked;
+        this.fullWord = fullWord;
     }
 }

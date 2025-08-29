@@ -3,8 +3,9 @@ package tension.helper;
 import tension.task.Task;
 
 /**
- * Provides methods to parse information given by
+ * Provides methods to parse information given dueDate
  * the user
+ *
  */
 public class Parser {
 
@@ -22,23 +23,23 @@ public class Parser {
      */
     public Command parse(String input) {
         int index = -1;
-        boolean isMark = false;
+        boolean isMarked = false;
         String[] parts = input.split("\\s+");
         String firstString = parts[0];
-        if (matches(firstString)) {
+        if (startsWithValidCommandWord(firstString)) {
             if (firstString.equals("mark") || parts[0].equals("unmark")) {
-                isMark = firstString.equals("mark");
+                isMarked = firstString.equals("mark");
                 index = Integer.parseInt(parts[1]) - 1;
             }
             else if (firstString.equals("delete")) {
                 index = Integer.parseInt(parts[1]) - 1;
             }
-            return new Command(index, firstString, isMark, input);
+            return new Command(index, firstString, isMarked, input);
         }
         return null;
     }
 
-    private static boolean matches(String s) {
+    private static boolean startsWithValidCommandWord(String s) {
         String[] valid= new String[]{"bye","list", "mark", "unmark","delete", "todo", "deadline", "event"};
         for (String v : valid) {
             if (s.equals(v)) {

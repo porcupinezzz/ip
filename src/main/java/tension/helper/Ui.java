@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Initialises Ui object to print templates
      */
-    public Ui(){}
+    public Ui() { }
 
     /**
      * Prints greeting message
@@ -27,7 +27,7 @@ public class Ui {
     public void displayDeletedTask(Task removed, int counter) {
         System.out.println("Noted. I've removed this tension.task:\n" +
                 removed.toString() + "\n" +
-                "     Now you have " + counter +" tasks in the list.");
+                "     Now you have " + counter + " tasks in the list.");
     }
 
     /**
