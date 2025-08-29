@@ -42,47 +42,61 @@ public class TaskList {
         Command command = commands.remove(0);
         int index = command.index;
         switch (command.commandName) {
-            case "delete":
-                Task removed = tasks.remove(index);
-                storage.deleteLine(index);
-                counter--;
-                ui.displayDeletedTask(removed, counter);
-                break;
-            case "event": // Fallthrough
-            case "deadline": // Fallthrough
-            case "todo":
-                Task currTask;
-                try {
-                    currTask = Task.makeTask(command.fullWord);
-                } catch (Exception e) {
-                    e.toString();
-                    e.printStackTrace();
-                    return false;
+        case "find":
+            ArrayList<Task> foundTasks = new ArrayList<>();
+            for (Task task : tasks) {
+                String keyword = command.fullWord.split(" ")[1];
+                String[] taskKeywords = (task.getDescription().split(" "));
+                for (String taskKeyword : taskKeywords) {
+                    if (taskKeyword.equals(keyword)) {
+                        foundTasks.add(task);
+                        break;
+                    }
                 }
-                tasks.add(currTask);
-                storage.writeFile(currTask);
-                counter++;
-                ui.displayAddedTask(currTask, counter);
-                break;
-            case "mark": // Fallthrough
-            case "unmark":
-                if (index < 0 || index >= counter) {
-                    System.out.println("Invalid index");
-                } else {
-                    Task task = tasks.get(index);
-                    String s = task.getStatus(command.isMarked);
-                    storage.rewriteLine(index, task.makeStoreString());
-                    System.out.println(s);
-                }
-                break;
-            case "list":
-                ui.listTasks(tasks, counter);
-                break;
-            case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
-                return true;
-            default:
-                throw new TensionException("Invalid command, please start with todo, deadline, or event");
+            }
+            ui.listMatchingTasks(foundTasks);
+            break;
+        case "delete":
+            Task removed = tasks.remove(index);
+            storage.deleteLine(index);
+            counter--;
+            ui.displayDeletedTask(removed, counter);
+            break;
+        case "event": // Fallthrough
+        case "deadline": // Fallthrough
+        case "todo":
+            Task currTask;
+            try {
+                currTask = Task.makeTask(command.fullWord);
+            } catch (Exception e) {
+                e.toString();
+                e.printStackTrace();
+                return false;
+            }
+            tasks.add(currTask);
+            storage.writeFile(currTask);
+            counter++;
+            ui.displayAddedTask(currTask, counter);
+            break;
+        case "mark": // Fallthrough
+        case "unmark":
+            if (index < 0 || index >= counter) {
+                System.out.println("Invalid index");
+            } else {
+                Task task = tasks.get(index);
+                String s = task.getStatus(command.isMarked);
+                storage.rewriteLine(index, task.makeStoreString());
+                System.out.println(s);
+            }
+            break;
+        case "list":
+            ui.listTasks(tasks, counter);
+            break;
+        case "bye":
+            System.out.println("Bye. Hope to see you again soon!");
+            return true;
+        default:
+            throw new TensionException("Invalid command, please start with todo, deadline, or event");
         }
         return false;
     }
