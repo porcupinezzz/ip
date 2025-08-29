@@ -40,7 +40,7 @@ public class Parser {
     }
 
     private static boolean startsWithValidCommandWord(String s) {
-        String[] valid= new String[]{"bye","list", "mark", "unmark","delete", "todo", "deadline", "event"};
+        String[] valid= new String[]{"bye","find","list", "mark", "unmark","delete", "todo", "deadline", "event"};
         for (String v : valid) {
             if (s.equals(v)) {
                 return true;
