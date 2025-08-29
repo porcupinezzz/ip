@@ -37,7 +37,7 @@ public class Parser {
     }
 
     public static boolean matches(String s) {
-        String[] valid= new String[]{"bye","list", "mark", "unmark","delete", "todo", "deadline", "event"};
+        String[] valid= new String[]{"bye","find", "list", "mark", "unmark","delete", "todo", "deadline", "event"};
         for (String v : valid) {
             if (s.equals(v)) {
                 return true;
