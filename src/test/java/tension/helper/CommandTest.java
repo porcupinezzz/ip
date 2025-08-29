@@ -10,6 +10,6 @@ public class CommandTest {
         assertEquals(0, command.index);
         assertEquals("help", command.commandName);
         assertEquals(true, command.isMark);
-        assertEquals("help me", command.fullWord);
+        assertEquals("help me", command.fullCommand);
     }
 }

@@ -2,6 +2,9 @@ package tension.task;
 
 public class Todo extends Task {
 
+    /**
+     * returns Todo object
+     */
     public Todo(String description) {
         super(description);
     }

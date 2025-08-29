@@ -15,7 +15,7 @@ public class Tension {
     private TaskList taskList;
     private Ui ui;
 
-    public Tension(String filePath) {
+    private Tension(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         ArrayList<Task> tasks = storage.retrieveTasks();
@@ -23,7 +23,7 @@ public class Tension {
     }
 
 
-    public void run() throws TensionException {
+    private void run() throws TensionException {
         Scanner scanner = new Scanner(System.in);
         ui.displayGreeting();
         while (true) {
@@ -37,6 +37,7 @@ public class Tension {
             }
         }
     }
+
     public static void main(String[] args) throws TensionException {
         new Tension("data.txt").run();
     }

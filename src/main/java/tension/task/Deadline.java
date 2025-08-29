@@ -8,11 +8,17 @@ public class Deadline extends Task {
 
     protected LocalDate by;
 
+    /**
+     * returns new Deadline object
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * checks that time given is in an acceptable format
+     */
     public static void checkFormat(String time){
         try {
             LocalDate.parse(time);

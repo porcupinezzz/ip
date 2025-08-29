@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * manages storage files
+ * Manages storage files
  */
 public class Storage {
 
@@ -21,13 +21,12 @@ public class Storage {
     }
 
     /**
-     * writes a task to the storage file
-     * @param t
+     * Writes a task to the storage file
      */
-    public void writeFile(Task t) {
+    public void writeFile(Task taskToWrite) {
         try {
             FileWriter fileWriter = new FileWriter(this.path, true);
-            fileWriter.write(t.makeStoreString() + "\n");
+            fileWriter.write(taskToWrite.makeStoreString() + "\n");
             fileWriter.close();
         }
         catch (Exception e) {
@@ -36,8 +35,7 @@ public class Storage {
     }
 
     /**
-     * deletes line number = n in storage
-     * @param n
+     * Deletes line number n in storage
      */
     public void deleteLine(int n) {
         try {
@@ -58,9 +56,7 @@ public class Storage {
     }
 
     /**
-     * replaces line number n with string newLine
-     * @param n
-     * @param newLine
+     * Replaces line number n with string newLine
      */
     public void rewriteLine(int n, String newLine) {
         try {
@@ -81,8 +77,7 @@ public class Storage {
     }
 
     /**
-     * retrieves tasks from storage
-     * @return ArrayList of tasks
+     * Retrieves tasks from storage
      */
     public ArrayList<Task> retrieveTasks(){
         try {

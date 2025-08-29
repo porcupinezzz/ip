@@ -11,10 +11,16 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * returns status icon based on tasks completion
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * returns a string of a task marked as done
+     */
     public String markDone() {
         isDone = true;
         String s = ("Nice! I've marked this tension.task as done:\n[" +
@@ -22,6 +28,9 @@ public class Task {
         return s;
     }
 
+    /**
+     * returns a string of a task unmarked as done
+     */
     public String unmarkDone() {
         isDone = false;
         String s = ("OK, I've marked this tension.task as not done yet:\n[" +
@@ -29,6 +38,9 @@ public class Task {
         return s;
     }
 
+    /**
+     * returns Task made from string input by user
+     */
     public static Task makeTask(String command) throws Exception {
         String[] parts = command.split("\\s+");
         String firstWord = parts[0];
@@ -55,6 +67,9 @@ public class Task {
         return new Task("");
     }
 
+    /**
+     * returns Task made from string returned from storage
+     */
     public static Task makeTaskFromMemory(String command) throws Exception {
         String[] parts = command.split("[|]");
         String firstWord = parts[0];
@@ -83,10 +98,6 @@ public class Task {
         }
     }
 
-    public static boolean isMark(String s) {
-        return s.matches("^mark\\s+\\d+$");
-    }
-
     public String getStatus(Boolean isMark) {
         if (isMark) {
             return markDone();
@@ -96,7 +107,12 @@ public class Task {
         }
     }
 
-    public static String secondWordOnwards(String valid, String s) throws TensionException {
+    /**
+     * Returns second word after key phrase
+     * @param valid the keyword that is needed
+     * @param s the whole string
+     */
+    private static String secondWordOnwards(String valid, String s) throws TensionException {
         String[] parts = s.strip().split("\\s+");
         if (!parts[0].equals(valid)) {
             throw new TensionException("Invalid tension.task description, keyword missing is: " + valid);
@@ -109,14 +125,14 @@ public class Task {
         return result.toString().strip();
     }
 
-    public String getDescription() {
-        return description;
-    }
-
+    /**
+     * returns string to store in storage
+     */
     public String makeStoreString() {
         return "";
     }
 
+    @Override
     public String toString() {
         return "["+getStatusIcon()+"] " + description;
     }
