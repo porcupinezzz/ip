@@ -21,7 +21,7 @@ public class Storage {
     }
 
     /**
-     * writes a tension.task to the storage file
+     * writes a task to the storage file
      * @param t
      */
     public void writeFile(Task t) {
