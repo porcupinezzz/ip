@@ -8,6 +8,6 @@ E|true|ur mom|6pm|7pm
 T|false|yes
 T|false|yes
 E|false|meeting|9pm|10pm tmr
-T|false|hahaha
 E|false|jdjdsfndfs|8pm|9oclock
 T|true|delete all
+T|false|yes

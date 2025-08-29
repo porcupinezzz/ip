@@ -1,5 +1,6 @@
 package tension.helper;
 
+import tension.TensionException;
 import tension.task.Task;
 
 import java.util.ArrayList;

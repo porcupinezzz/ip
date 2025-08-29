@@ -3,7 +3,7 @@
 /out/
 /*.iml
 
-# Gradle build files
+# Gradle tension.tension.build files
 /.gradle/
 /build/
 src/main/resources/docs/

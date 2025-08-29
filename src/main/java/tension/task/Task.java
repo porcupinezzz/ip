@@ -1,5 +1,7 @@
 package tension.task;
 
+import tension.TensionException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
