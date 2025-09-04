@@ -103,4 +103,65 @@ public class TaskList {
         }
         return false;
     }
+
+    /**
+     * Executes all the commands in the command list
+     * and adds them to the task list
+     */
+    public String executesAndReturnString() throws TensionException {
+        int counter = tasks.size();
+        Command command = commands.remove(0);
+        int index = command.getIndex();
+        switch (command.getCommandName()) {
+        case "find":
+            ArrayList<Task> foundTasks = new ArrayList<>();
+            for (Task task : tasks) {
+                String keyword = command.getFullWord().split(" ")[1];
+                String[] taskKeywords = (task.getDescription().split(" "));
+                for (String taskKeyword : taskKeywords) {
+                    if (taskKeyword.equals(keyword)) {
+                        foundTasks.add(task);
+                        break;
+                    }
+                }
+            }
+            ui.listMatchingTasksAsString(foundTasks);
+            break;
+        case "delete":
+            Task removed = tasks.remove(index);
+            storage.deleteLine(index);
+            counter--;
+            return ui.displayDeletedTaskAsString(removed, counter);
+        case "event": // Fallthrough
+        case "deadline": // Fallthrough
+        case "todo":
+            Task currTask;
+            try {
+                currTask = Task.makeTask(command.getFullWord());
+            } catch (Exception e) {
+                return e.getMessage();
+            }
+            tasks.add(currTask);
+            storage.writeFile(currTask);
+            counter++;
+            return ui.displayAddedTaskAsString(currTask, counter);
+        case "mark": // Fallthrough
+        case "unmark":
+            if (index < 0 || index >= counter) {
+                return "Invalid index input";
+            } else {
+                Task task = tasks.get(index);
+                String s = task.getStatus(command.getIsMarked());
+                storage.rewriteLine(index, task.makeStoreString());
+                return s;
+            }
+        case "list":
+            return ui.listTasksAsString(tasks, counter);
+        case "bye":
+            return "Bye. Hope to see you again soon!";
+        default:
+            return "Invalid command, please start with todo, deadline, or event";
+        }
+        return "";
+    }
 }
