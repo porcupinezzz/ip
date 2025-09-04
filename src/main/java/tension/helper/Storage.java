@@ -1,7 +1,5 @@
 package tension.helper;
 
-import tension.task.Task;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,12 +7,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import tension.task.Task;
+
 /**
  * Manages storage files
  */
 public class Storage {
 
-    String path;
+    private String path;
 
     public Storage(String path) {
         this.path = path;
@@ -28,8 +28,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(this.path, true);
             fileWriter.write(taskToWrite.makeStoreString() + "\n");
             fileWriter.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -79,7 +78,7 @@ public class Storage {
     /**
      * Retrieves tasks from storage
      */
-    public ArrayList<Task> retrieveTasks(){
+    public ArrayList<Task> retrieveTasks() {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             Path filePath = Path.of(this.path);

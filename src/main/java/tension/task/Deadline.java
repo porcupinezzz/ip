@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * creates Deadline class for tasks with deadline
+ */
 public class Deadline extends Task {
 
     protected LocalDate dueDate;

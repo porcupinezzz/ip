@@ -1,14 +1,18 @@
 package tension;
 
-import tension.helper.Command;
-import tension.helper.Storage;
-import tension.helper.Ui;
-import tension.helper.TaskList;
-import tension.helper.Parser;
-import tension.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import tension.helper.Command;
+import tension.helper.Parser;
+import tension.helper.Storage;
+import tension.helper.TaskList;
+import tension.helper.Ui;
+import tension.task.Task;
+
+/**
+ * starts the main chatbot application
+ */
 public class Tension {
 
     private Storage storage;
