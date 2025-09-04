@@ -19,13 +19,16 @@ public class Tension {
     private TaskList taskList;
     private Ui ui;
 
-    private Tension(String filePath) {
+    /**
+     * Initialises the Tension bot based on data storage
+     * @param filePath
+     */
+    public Tension(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         ArrayList<Task> tasks = storage.retrieveTasks();
         this.taskList = new TaskList(tasks, new ArrayList<>(), storage, ui);
     }
-
 
     private void run() throws TensionException {
         Scanner scanner = new Scanner(System.in);
@@ -39,6 +42,20 @@ public class Tension {
                 scanner.close();
                 return;
             }
+        }
+    }
+
+    /**
+     * responds appropriately to input without printing
+     */
+    public String responseToInput(String input) {
+        try {
+            Parser parser = new Parser();
+            Command command = parser.parse(input);
+            taskList.insertCommand(command);
+            return taskList.executesAndReturnString();
+        } catch (TensionException e) {
+            return e.getMessage();
         }
     }
 
