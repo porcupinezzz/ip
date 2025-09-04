@@ -1,10 +1,13 @@
 package tension.helper;
 
+import java.util.ArrayList;
+
 import tension.TensionException;
 import tension.task.Task;
 
-import java.util.ArrayList;
-
+/**
+ * Stores list of all tasks and commands to execute
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -40,12 +43,12 @@ public class TaskList {
     public boolean executesAndExits() throws TensionException {
         int counter = tasks.size();
         Command command = commands.remove(0);
-        int index = command.index;
-        switch (command.commandName) {
+        int index = command.getIndex();
+        switch (command.getCommandName()) {
         case "find":
             ArrayList<Task> foundTasks = new ArrayList<>();
             for (Task task : tasks) {
-                String keyword = command.fullWord.split(" ")[1];
+                String keyword = command.getFullWord().split(" ")[1];
                 String[] taskKeywords = (task.getDescription().split(" "));
                 for (String taskKeyword : taskKeywords) {
                     if (taskKeyword.equals(keyword)) {
@@ -67,7 +70,7 @@ public class TaskList {
         case "todo":
             Task currTask;
             try {
-                currTask = Task.makeTask(command.fullWord);
+                currTask = Task.makeTask(command.getFullWord());
             } catch (Exception e) {
                 e.toString();
                 e.printStackTrace();
@@ -84,7 +87,7 @@ public class TaskList {
                 System.out.println("Invalid index");
             } else {
                 Task task = tasks.get(index);
-                String s = task.getStatus(command.isMarked);
+                String s = task.getStatus(command.getIsMarked());
                 storage.rewriteLine(index, task.makeStoreString());
                 System.out.println(s);
             }

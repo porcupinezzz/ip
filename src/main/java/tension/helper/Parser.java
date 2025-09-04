@@ -1,7 +1,5 @@
 package tension.helper;
 
-import tension.task.Task;
-
 /**
  * Provides methods to parse information given dueDate
  * the user
@@ -30,8 +28,7 @@ public class Parser {
             if (firstString.equals("mark") || parts[0].equals("unmark")) {
                 isMarked = firstString.equals("mark");
                 index = Integer.parseInt(parts[1]) - 1;
-            }
-            else if (firstString.equals("delete")) {
+            } else if (firstString.equals("delete")) {
                 index = Integer.parseInt(parts[1]) - 1;
             }
             return new Command(index, firstString, isMarked, input);
@@ -40,7 +37,7 @@ public class Parser {
     }
 
     private static boolean startsWithValidCommandWord(String s) {
-        String[] valid= new String[]{"bye","find","list", "mark", "unmark","delete", "todo", "deadline", "event"};
+        String[] valid = new String[]{"bye", "find", "list", "mark", "unmark", "delete", "todo", "deadline", "event"};
         for (String v : valid) {
             if (s.equals(v)) {
                 return true;

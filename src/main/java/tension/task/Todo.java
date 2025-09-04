@@ -1,5 +1,8 @@
 package tension.task;
 
+/**
+ * creates Todo task for tasks with description only
+ */
 public class Todo extends Task {
 
     /**

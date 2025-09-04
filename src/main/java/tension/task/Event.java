@@ -1,5 +1,8 @@
 package tension.task;
 
+/**
+ * creates Event class for events with start and end time
+ */
 public class Event extends Task {
 
     protected String startTime;
@@ -14,6 +17,9 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String makeStoreString() {
         return "E|" + super.isDone + "|" + description + "|" + startTime + "|" + endTime;
@@ -21,6 +27,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime +")";
+        return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
     }
 }

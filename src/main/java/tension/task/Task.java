@@ -2,10 +2,16 @@ package tension.task;
 
 import tension.TensionException;
 
-public class Task {
+/**
+ * Abstract class for all tasks
+ */
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initialises the task description and completion
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -23,8 +29,8 @@ public class Task {
      */
     public String markDone() {
         isDone = true;
-        String s = ("Nice! I've marked this tension.task as done:\n[" +
-                getStatusIcon() + "] "+ description);
+        String s = ("Nice! I've marked this tension.task as done:\n["
+                + getStatusIcon() + "] " + description);
         return s;
     }
 
@@ -33,8 +39,8 @@ public class Task {
      */
     public String unmarkDone() {
         isDone = false;
-        String s = ("OK, I've marked this tension.task as not done yet:\n[" +
-                getStatusIcon() +"] "+ description);
+        String s = ("OK, I've marked this tension.task as not done yet:\n["
+                + getStatusIcon() + "] " + description);
         return s;
     }
 
@@ -62,7 +68,7 @@ public class Task {
             checkStrings(description, startTime, endTime);
             return new Event(description, startTime, endTime);
         }
-        return new Task("");
+        return null;
     }
 
     /**
@@ -71,7 +77,7 @@ public class Task {
     public static Task makeTaskFromMemory(String command) throws Exception {
         String[] parts = command.split("[|]");
         String firstWord = parts[0];
-        Task task = new Task("");
+        Task task = null;
         if (firstWord.equals("T")) {
             checkStrings(parts[2]);
             task = new Todo(parts[2]);
@@ -82,10 +88,14 @@ public class Task {
             checkStrings(parts[2], parts[3], parts[4]);
             task = new Event(parts[2], parts[3], parts[4]);
         }
+        assert task != null;
         task.getStatus(Boolean.parseBoolean(parts[1]));
         return task;
     }
 
+    /**
+     * checks that strings are not null or empty
+     */
     public static void checkStrings(String... strings) {
         for (String s : strings) {
             if (s != null && s.isEmpty()) {
@@ -129,7 +139,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "["+getStatusIcon()+"] " + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
     public String getDescription() {
