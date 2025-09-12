@@ -33,6 +33,7 @@ public class TaskList {
      * Inserts command into command list
      */
     public void insertCommand(Command command) {
+        assert command != null;
         this.commands.add(command);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      */
     public boolean executesAndExits() throws TensionException {
         int counter = tasks.size();
+        assert !commands.isEmpty();
         Command command = commands.remove(0);
         int index = command.getIndex();
         switch (command.getCommandName()) {
@@ -110,6 +112,7 @@ public class TaskList {
      */
     public String executesAndReturnString() throws TensionException {
         int counter = tasks.size();
+        assert !commands.isEmpty();
         Command command = commands.remove(0);
         int index = command.getIndex();
         switch (command.getCommandName()) {
@@ -125,8 +128,7 @@ public class TaskList {
                     }
                 }
             }
-            ui.listMatchingTasksAsString(foundTasks);
-            break;
+            return ui.listMatchingTasksAsString(foundTasks);
         case "delete":
             Task removed = tasks.remove(index);
             storage.deleteLine(index);
@@ -162,6 +164,5 @@ public class TaskList {
         default:
             return "Invalid command, please start with todo, deadline, or event";
         }
-        return "";
     }
 }

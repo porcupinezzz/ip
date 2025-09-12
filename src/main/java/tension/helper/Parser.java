@@ -24,6 +24,7 @@ public class Parser {
         boolean isMarked = false;
         String[] parts = input.split("\\s+");
         String firstString = parts[0];
+        Command command = null;
         if (startsWithValidCommandWord(firstString)) {
             if (firstString.equals("mark") || parts[0].equals("unmark")) {
                 isMarked = firstString.equals("mark");
@@ -31,9 +32,10 @@ public class Parser {
             } else if (firstString.equals("delete")) {
                 index = Integer.parseInt(parts[1]) - 1;
             }
-            return new Command(index, firstString, isMarked, input);
+            command = new Command(index, firstString, isMarked, input);
         }
-        return null;
+        assert command != null;
+        return command;
     }
 
     private static boolean startsWithValidCommandWord(String s) {
