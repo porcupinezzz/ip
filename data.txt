@@ -4,3 +4,4 @@ T|true|attend CS2103T Tutorial
 E|false|CCA Session|8pm|9pm
 T|true|hhrfuhurfr
 T|false|list
+T|false|hello

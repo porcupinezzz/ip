@@ -32,6 +32,9 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        assert dialog != null;
+        assert text != null;
+        assert img != null;
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -47,10 +50,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
+        assert text != null;
+        assert img != null;
         return new DialogBox(text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
+        assert text != null;
+        assert img != null;
         var db = new DialogBox(text, img);
         db.flip();
         return db;

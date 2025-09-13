@@ -27,6 +27,7 @@ public class Ui {
      * @param counter number of tasks remaining
      */
     public String displayDeletedTaskAsString(Task removed, int counter) {
+        assert removed != null;
         return "Noted. I've removed this task:\n"
                 + removed.toString() + "\n"
                 + "     Now you have " + counter + " tasks in the list.";
@@ -38,6 +39,7 @@ public class Ui {
      * @param counter number of tasks in list
      */
     public String displayAddedTaskAsString(Task added, int counter) {
+        assert added != null;
         return "Got it. I've added this task:\n"
                 + added + "\n"
                 + "     Now you have " + counter + " tasks in the list.";
@@ -49,6 +51,7 @@ public class Ui {
      * @param counter number of tasks in list
      */
     public String listTasksAsString(ArrayList<Task> taskList, int counter) {
+        assert taskList != null;
         String tasks = "";
         tasks += "Here are the tasks in your list:\n";
         for (int i = 0; i < counter; i++) {
@@ -61,6 +64,7 @@ public class Ui {
      * stringifies all tasks in provided list
      */
     public String listMatchingTasksAsString(ArrayList<Task> taskList) {
+        assert taskList != null;
         String tasks = "";
         tasks += ("Here are the matching tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {

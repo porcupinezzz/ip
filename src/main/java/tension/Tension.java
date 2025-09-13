@@ -23,6 +23,8 @@ public class Tension {
      * @param filePath
      */
     public Tension(String filePath) {
+        assert filePath != null;
+        assert !filePath.isEmpty();
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         ArrayList<Task> tasks = storage.retrieveTasks();

@@ -33,8 +33,11 @@ public class TaskList {
      * Inserts command into command list
      */
     public void insertCommand(Command command) {
+        assert command != null;
         this.commands.add(command);
     }
+
+    
 
     /**
      * Executes all the commands in the command list
@@ -42,6 +45,7 @@ public class TaskList {
      */
     public String executesAndReturnString() throws TensionException {
         int counter = tasks.size();
+        assert !commands.isEmpty();
         Command command = commands.remove(0);
         int index = command.getIndex();
         switch (command.getCommandName()) {
