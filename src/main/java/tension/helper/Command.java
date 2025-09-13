@@ -32,6 +32,11 @@ public class Command {
         return commandName;
     }
 
+    public String getTag() {
+        assert commandName.equals("tag");
+        return fullWord.split("\\s+")[2];
+    }
+
     public String getFullWord() {
         return fullWord;
     }
