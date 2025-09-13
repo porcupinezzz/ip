@@ -1,7 +1,7 @@
-E|false|meeting|1pm|2pm
-D|false|help her|2019-10-15
-T|true|attend CS2103T Tutorial
-E|false|CCA Session|8pm|9pm
-T|true|hhrfuhurfr
-T|false|list
-T|false|hello
+E|false|meeting|1pm|2pm|[, important]
+D|false|help her|2019-10-15|[, important]
+T|true|attend CS2103T Tutorial|[, important]
+E|false|CCA Session|8pm|9pm|[, important]
+T|true|hhrfuhurfr|[, important]
+T|false|list|[, yummy, mhmm]
+T|false|hello|[]

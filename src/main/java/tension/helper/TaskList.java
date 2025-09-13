@@ -37,8 +37,6 @@ public class TaskList {
         this.commands.add(command);
     }
 
-    
-
     /**
      * Executes all the commands in the command list
      * and adds them to the task list
@@ -49,6 +47,11 @@ public class TaskList {
         Command command = commands.remove(0);
         int index = command.getIndex();
         switch (command.getCommandName()) {
+        case "tag":
+            Task taggedTask = tasks.get(index);
+            taggedTask.addTag(command.getTag());
+            storage.rewriteLine(index, taggedTask.makeStoreString());
+            return ui.listTaggedTaskAsString(taggedTask);
         case "find":
             ArrayList<Task> foundTasks = new ArrayList<>();
             Task.findTasksWithKeyword(tasks, foundTasks, command.getFullWord());

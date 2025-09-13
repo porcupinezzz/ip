@@ -24,7 +24,7 @@ public class StorageTest {
         Task task = Task.makeTask("todo sample command");
         storage.writeFile(task);
         String fileContent = Files.readString(Path.of(path));
-        assertEquals(originalContent + "T|false|sample command\n", fileContent);
+        assertEquals(originalContent + "T|false|sample command|[]\n", fileContent);
     }
 
     @Test

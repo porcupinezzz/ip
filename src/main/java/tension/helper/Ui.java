@@ -72,4 +72,12 @@ public class Ui {
         }
         return tasks;
     }
+
+    /**
+     * stringifies a taggedTask
+     */
+    public String listTaggedTaskAsString(Task taggedTask) {
+        assert taggedTask != null;
+        return "Got it, I've tagged this task: \n" + taggedTask + "\n";
+    }
 }

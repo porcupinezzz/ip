@@ -3,6 +3,7 @@ package tension.task;
 import java.util.ArrayList;
 
 import tension.TensionException;
+import tension.helper.Parser;
 
 /**
  * Abstract class for all tasks
@@ -10,6 +11,7 @@ import tension.TensionException;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tags;
 
     /**
      * Initialises the task description and completion
@@ -17,6 +19,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -78,17 +81,21 @@ public abstract class Task {
      */
     public static Task makeTaskFromMemory(String command) throws Exception {
         String[] parts = command.split("[|]");
+        Parser parser = new Parser();
         String firstWord = parts[0];
         Task task = null;
         if (firstWord.equals("T")) {
             checkStrings(parts[2]);
-            task = new Todo(parts[2]);
+            ArrayList<String> tags = parser.parseStringToArrayList(parts[3]);
+            task = new Todo(parts[2], tags);
         } else if (firstWord.equals("D")) {
             checkStrings(parts[2], parts[3]);
-            task = new Deadline(parts[2], parts[3]);
+            ArrayList<String> tags = parser.parseStringToArrayList(parts[4]);
+            task = new Deadline(parts[2], parts[3], tags);
         } else if (firstWord.equals("E")) {
             checkStrings(parts[2], parts[3], parts[4]);
-            task = new Event(parts[2], parts[3], parts[4]);
+            ArrayList<String> tags = parser.parseStringToArrayList(parts[5]);
+            task = new Event(parts[2], parts[3], parts[4], tags);
         }
         assert task != null;
         task.getStatus(Boolean.parseBoolean(parts[1]));
@@ -156,6 +163,20 @@ public abstract class Task {
      */
     public String makeStoreString() {
         return "";
+    }
+
+    /**
+     * adds a singular tag to the tags arrayList
+     */
+    public void addTag(String tag) {
+        tags.add(tag);
+    }
+
+    public String getTagsAsString() {
+        if (tags.isEmpty()) {
+            return "";
+        }
+        return String.join(" #", tags);
     }
 
     @Override
