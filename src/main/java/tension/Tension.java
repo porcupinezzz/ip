@@ -1,7 +1,6 @@
 package tension;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import tension.helper.Command;
 import tension.helper.Parser;
@@ -32,21 +31,6 @@ public class Tension {
         this.taskList = new TaskList(tasks, new ArrayList<>(), storage, ui);
     }
 
-    private void run() throws TensionException {
-        Scanner scanner = new Scanner(System.in);
-        ui.displayGreeting();
-        while (true) {
-            String input = scanner.nextLine();
-            Parser parser = new Parser();
-            Command command = parser.parse(input);
-            taskList.insertCommand(command);
-            if (taskList.executesAndExits()) {
-                scanner.close();
-                return;
-            }
-        }
-    }
-
     /**
      * responds appropriately to input without printing
      */
@@ -62,6 +46,6 @@ public class Tension {
     }
 
     public static void main(String[] args) throws TensionException {
-        new Tension("data.txt").run();
+        new Tension("data.txt");
     }
 }

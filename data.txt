@@ -1,5 +1,7 @@
 E|false|meeting|1pm|2pm
 D|false|help her|2019-10-15
-T|false|attend CS2103T Tutorial
+T|true|attend CS2103T Tutorial
 E|false|CCA Session|8pm|9pm
+T|true|hhrfuhurfr
+T|false|list
 T|false|hello

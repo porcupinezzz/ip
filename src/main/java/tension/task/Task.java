@@ -1,5 +1,7 @@
 package tension.task;
 
+import java.util.ArrayList;
+
 import tension.TensionException;
 
 /**
@@ -128,6 +130,25 @@ public abstract class Task {
             result.append(" ");
         }
         return result.toString().strip();
+    }
+
+    /**
+     * Returns list of tasks that contained queried keyword
+     * @param tasks the list of all tasks to be reviewed
+     * @param foundTasks the list of tasks containing keyword
+     * @param fullCommand the whole command
+     */
+    public static void findTasksWithKeyword(ArrayList<Task> tasks, ArrayList<Task> foundTasks, String fullCommand) {
+        for (Task task : tasks) {
+            String keyword = fullCommand.split(" ")[1];
+            String[] taskKeywords = (task.getDescription().split(" "));
+            for (String taskKeyword : taskKeywords) {
+                if (taskKeyword.equals(keyword)) {
+                    foundTasks.add(task);
+                    break;
+                }
+            }
+        }
     }
 
     /**
