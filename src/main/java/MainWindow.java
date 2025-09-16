@@ -67,7 +67,7 @@ public class MainWindow extends AnchorPane {
     /**
      * displays error in GUI when unable to load data file
      */
-    public void onCoreInitFailed(String friendlyMessage, Throwable error) {
+    public void displayReadError(String friendlyMessage, Throwable error) {
         // Disable input since core isn’t available
         sendButton.setDisable(true);
 
