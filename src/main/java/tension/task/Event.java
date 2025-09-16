@@ -30,7 +30,7 @@ public class Event extends Task {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public String makeStoreString() {

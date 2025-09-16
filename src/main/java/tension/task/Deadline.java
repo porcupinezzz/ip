@@ -42,6 +42,9 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String makeStoreString() {
         return "D|" + super.isDone + "|" + description + "|" + dueDate + "|" + super.tags;

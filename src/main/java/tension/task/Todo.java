@@ -22,6 +22,9 @@ public class Todo extends Task {
         this.tags = tags;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String makeStoreString() {
         return "T|" + super.isDone + "|" + description + "|" + super.tags;
