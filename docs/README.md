@@ -6,7 +6,7 @@ Tension is an app that allows you to store tasks categorised into todos, deadlin
 
 1. Ensure you have Java 17 or above installed in your Computer.
    Mac users: Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-2. Download the latest .jar file from [here]().
+2. Download the latest .jar file from [here](https://github.com/porcupinezzz/ip/blob/master/tension.jar).
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
 4. Within the same folder, create a file named **data.txt**
 5. Open a command terminal of your choice and run `java -jar tension.jar`
