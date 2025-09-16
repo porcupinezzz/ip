@@ -63,7 +63,7 @@ public abstract class Task {
                 return new Todo(description);
             } else if (firstWord.equals("deadline")) {
                 String description = Task.secondWordOnwards("deadline", splitBySlash[0]);
-                String byTime = Task.secondWordOnwards("dueDate", splitBySlash[1]);
+                String byTime = Task.secondWordOnwards("by", splitBySlash[1]);
                 checkStrings(description, byTime);
                 Deadline.checkFormat(byTime);
                 return new Deadline(description, byTime);
@@ -74,6 +74,8 @@ public abstract class Task {
                 checkStrings(description, startTime, endTime);
                 return new Event(description, startTime, endTime);
             }
+        } catch (TensionException e) {
+            throw e;
         } catch (Exception e) {
             throw new TensionException("Missing a slash according to the given command");
         }

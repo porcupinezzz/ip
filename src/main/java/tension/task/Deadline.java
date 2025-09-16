@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import tension.TensionException;
+
 /**
  * creates Deadline class for tasks with deadline
  */
@@ -32,11 +34,11 @@ public class Deadline extends Task {
     /**
      * checks that time given is in an acceptable format
      */
-    public static void checkFormat(String time) {
+    public static void checkFormat(String time) throws TensionException {
         try {
             LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format: needs to be yyyy-mm-dd");
+            throw new TensionException("Invalid date format: needs to be yyyy-mm-dd");
         }
     }
 
