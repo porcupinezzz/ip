@@ -12,7 +12,7 @@ import tension.Tension;
  */
 public class Main extends Application {
 
-    private Tension tension = new Tension("data.txt");
+    private Tension tension;
 
     @Override
     public void start(Stage stage) {
@@ -21,6 +21,12 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            try {
+                tension = new Tension("data.txt");
+            } catch (Exception e) {
+                MainWindow controller = fxmlLoader.getController();
+                controller.onCoreInitFailed("Couldn’t load data.txt. Please check the file and try again.", e);
+            }
             fxmlLoader.<MainWindow>getController().setTension(tension); // inject the tension instance
             stage.show();
         } catch (IOException e) {

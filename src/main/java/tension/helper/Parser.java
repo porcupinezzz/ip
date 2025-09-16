@@ -3,6 +3,8 @@ package tension.helper;
 import java.util.ArrayList;
 import java.util.List;
 
+import tension.TensionException;
+
 /**
  * Provides methods to parse information given dueDate
  * the user
@@ -22,12 +24,12 @@ public class Parser {
      *                delete, todo, deadline, event
      * @return tension.helper.Command
      */
-    public Command parse(String input) {
+    public Command parse(String input) throws TensionException {
         int index = -1;
         boolean isMarked = false;
         String[] parts = input.split("\\s+");
         String firstString = parts[0];
-        Command command = null;
+        Command command;
         if (startsWithValidCommandWord(firstString)) {
             if (firstString.equals("mark") || parts[0].equals("unmark")) {
                 isMarked = firstString.equals("mark");
@@ -36,8 +38,10 @@ public class Parser {
                 index = Integer.parseInt(parts[1]) - 1;
             }
             command = new Command(index, firstString, isMarked, input);
+        } else {
+            throw new TensionException("Invalid command: start with \"bye\", \"find\", \"list\", \"mark\", \"unmark\""
+                                        + "\"delete\", \"todo\", \"deadline\", \"event\", \"tag\"");
         }
-        assert command != null;
         return command;
     }
 

@@ -22,7 +22,7 @@ public class Tension {
      * Initialises the Tension bot based on data storage
      * @param filePath
      */
-    public Tension(String filePath) {
+    public Tension(String filePath) throws Exception {
         assert filePath != null;
         assert !filePath.isEmpty();
         this.ui = new Ui();
@@ -42,10 +42,12 @@ public class Tension {
             return taskList.executesAndReturnString();
         } catch (TensionException e) {
             return e.getMessage();
+        } catch (Exception e) {
+            return "Something went wrong, please try again, error not implemented yet: " + e.getMessage();
         }
     }
 
-    public static void main(String[] args) throws TensionException {
+    public static void main(String[] args) throws Exception {
         new Tension("data.txt");
     }
 }

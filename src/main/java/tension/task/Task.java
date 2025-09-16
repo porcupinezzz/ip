@@ -52,34 +52,38 @@ public abstract class Task {
     /**
      * returns Task made from string input by user
      */
-    public static Task makeTask(String command) throws Exception {
+    public static Task makeTask(String command) throws TensionException {
         String[] parts = command.split("\\s+");
         String firstWord = parts[0];
         String[] splitBySlash = command.split("/");
-        if (firstWord.equals("todo")) {
-            String description = Task.secondWordOnwards("todo", splitBySlash[0]);
-            checkStrings(description);
-            return new Todo(description);
-        } else if (firstWord.equals("deadline")) {
-            String description = Task.secondWordOnwards("deadline", splitBySlash[0]);
-            String byTime = Task.secondWordOnwards("dueDate", splitBySlash[1]);
-            checkStrings(description, byTime);
-            Deadline.checkFormat(byTime);
-            return new Deadline(description, byTime);
-        } else if (firstWord.equals("event")) {
-            String description = Task.secondWordOnwards("event", splitBySlash[0]);
-            String startTime = Task.secondWordOnwards("from", splitBySlash[1]);
-            String endTime = Task.secondWordOnwards("to", splitBySlash[2]);
-            checkStrings(description, startTime, endTime);
-            return new Event(description, startTime, endTime);
+        try {
+            if (firstWord.equals("todo")) {
+                String description = Task.secondWordOnwards("todo", splitBySlash[0]);
+                checkStrings(description);
+                return new Todo(description);
+            } else if (firstWord.equals("deadline")) {
+                String description = Task.secondWordOnwards("deadline", splitBySlash[0]);
+                String byTime = Task.secondWordOnwards("dueDate", splitBySlash[1]);
+                checkStrings(description, byTime);
+                Deadline.checkFormat(byTime);
+                return new Deadline(description, byTime);
+            } else if (firstWord.equals("event")) {
+                String description = Task.secondWordOnwards("event", splitBySlash[0]);
+                String startTime = Task.secondWordOnwards("from", splitBySlash[1]);
+                String endTime = Task.secondWordOnwards("to", splitBySlash[2]);
+                checkStrings(description, startTime, endTime);
+                return new Event(description, startTime, endTime);
+            }
+        } catch (Exception e) {
+            throw new TensionException("Missing a slash according to the given command");
         }
-        return null;
+        throw new TensionException("Unknown command: " + command);
     }
 
     /**
      * returns Task made from string returned from storage
      */
-    public static Task makeTaskFromMemory(String command) throws Exception {
+    public static Task makeTaskFromMemory(String command) {
         String[] parts = command.split("[|]");
         Parser parser = new Parser();
         String firstWord = parts[0];
@@ -129,7 +133,7 @@ public abstract class Task {
     private static String secondWordOnwards(String valid, String s) throws TensionException {
         String[] parts = s.strip().split("\\s+");
         if (!parts[0].equals(valid)) {
-            throw new TensionException("Invalid tension.task description, keyword missing is: " + valid);
+            throw new TensionException("Invalid task description, keyword missing is: " + valid);
         }
         StringBuilder result = new StringBuilder();
         for (int i = 1; i < parts.length; i++) {

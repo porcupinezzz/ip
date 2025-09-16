@@ -1,12 +1,12 @@
 package tension.helper;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import tension.TensionException;
 import tension.task.Task;
 
 /**
@@ -57,7 +57,7 @@ public class Storage {
     /**
      * Replaces line number n with string newLine
      */
-    public void rewriteLine(int n, String newLine) {
+    public void rewriteLine(int n, String newLine) throws TensionException {
         try {
             Path filePath = Path.of(this.path);
             List<String> lines = Files.readAllLines(filePath);
@@ -71,28 +71,20 @@ public class Storage {
 
             Files.write(filePath, lines);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new TensionException("Failed to reconstruct file");
         }
     }
 
     /**
      * Retrieves tasks from storage
      */
-    public ArrayList<Task> retrieveTasks() {
-        try {
-            ArrayList<Task> tasks = new ArrayList<>();
-            Path filePath = Path.of(this.path);
-            List<String> lines = Files.readAllLines(filePath);
-            for (String line : lines) {
-                tasks.add(Task.makeTaskFromMemory(line));
-            }
-            return tasks;
-        } catch (IOException e) {
-            System.out.println("Error reading file");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public ArrayList<Task> retrieveTasks() throws Exception {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Path filePath = Path.of(this.path);
+        List<String> lines = Files.readAllLines(filePath);
+        for (String line : lines) {
+            tasks.add(Task.makeTaskFromMemory(line));
         }
-        return null;
+        return tasks;
     }
 }

@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import tension.Tension;
+import tension.helper.Ui;
+
 /**
  * Controller for the main GUI.
  */
@@ -19,19 +21,27 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Tension tension;
+    private Tension tension = null;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * initializes dialogContainer
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog((new Ui()).displayGreetingAsString(), dukeImage));
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Tension instance */
     public void setTension(Tension tension) {
-        this.tension = tension;
+        try {
+            this.tension = tension;
+        } catch (Exception e) {
+            this.tension = null;
+        }
     }
 
     /**
@@ -40,6 +50,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        if (tension == null) {
+            // Belt-and-suspenders guard (in case someone wires the button differently)
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                    "Could not load data path, make sure file data.txt is in top folder", dukeImage));
+        }
         String input = userInput.getText();
         String response = tension.responseToInput(input);
         dialogContainer.getChildren().addAll(
@@ -47,5 +62,22 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    /**
+     * displays error in GUI when unable to load data file
+     */
+    public void onCoreInitFailed(String friendlyMessage, Throwable error) {
+        // Disable input since core isn’t available
+        sendButton.setDisable(true);
+
+        // Show a chat-style message so it appears inside your app
+        String detail = (error != null && error.getMessage() != null) ? error.getMessage() : "";
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(
+                        friendlyMessage + (detail.isBlank() ? "" : "\n\ndata.txt should be in the top folder"),
+                        dukeImage
+                )
+        );
     }
 }
